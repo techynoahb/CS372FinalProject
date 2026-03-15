@@ -91,22 +91,22 @@
          <form action="#">
              <label for="username">Username:</label>
              <input type="text" id="username" name="username" 
-                    pattern="[A-Za-z]+" /* 1 or more instances of any letter from A to Z */ 
-                    title="Username must only contain letters." 
+                    pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).{8,16}" 
+                    title="Username must be 8-16 characters long and contain uppercase, lowercase, and special character." 
                     required>
              <br><br>
 
              <label for="pwd">Password:</label>
              <input type="password" id="pwd" name="pwd" 
-                    pattern="[A-Za-z]+" 
-                    title="Password must only contain letters." 
+                    pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).{8,16}" 
+                    title="Password must be 8-16 characters long and contain uppercase, lowercase, and special character." 
                     required>
              <br><br>
 
              <input type="submit" value="Submit">
          </form>
          <p style="font-size: 0.8em; color: #666; margin-top: 10px;">
-            Disclaimer: Usernames and passwords must consist of only letters.
+            Disclaimer: Usernames and passwords must be 8-16 characters long and contain one uppercase letter, one lowercase letter, and one special character.
          </p>
       </main>
 
