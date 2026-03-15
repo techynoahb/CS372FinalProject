@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Cinema Scenes - Login</title>
+      <style>
+         
+         nav a {
+            text-decoration: none;
+            background-color: #ddd;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px 5px 0 0; 
+            margin-right: 5px;
+            font-family: "Herculanum", fantasy;
+         }
+
+         nav a:hover { background-color: #ccc; }
+         
+         body { 
+            font-family: "Times New Roman", Times, serif; 
+            margin: 20px; 
+            text-align: center; 
+         }
+
+         header, footer { 
+            margin-bottom: 20px; 
+            border-bottom: 1px solid #ccc; 
+            padding-bottom: 20px; 
+         }
+
+         footer { 
+            border-bottom: none; 
+            border-top: 1px solid #ccc; 
+            padding-top: 20px; 
+            margin-top: 20px; 
+         }
+         
+         form {
+            display: inline-block;
+            border: 1px solid #eee;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+         }
+
+         .slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin: auto;
+         }
+
+         .mySlides {
+            display: none;
+            text-align: center;
+         }
+
+         .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+         }
+
+         .active {
+            background-color: #717171;
+         }
+
+      </style>
+   </head>
+
+   <body>
+      <header>
+         
+         <img src="Images/logo.jpg" alt="Cinema Scenes Logo" width="150">
+         <h1>Cinema Scenes</h1>
+         <br>
+
+         <nav>
+            <a href='home.html'>Home</a>
+            <a href='login.html'>Login</a>
+            <a href='gallery.html'>Gallery</a>
+         </nav>
+      </header>
+
+      <main>
+         <h2>Member Login</h2>
+         
+         <form action="#">
+             <label for="username">Username:</label>
+             <input type="text" id="username" name="username" 
+                    pattern="[A-Za-z]+" /* 1 or more instances of any letter from A to Z */ 
+                    title="Username must only contain letters." 
+                    required>
+             <br><br>
+
+             <label for="pwd">Password:</label>
+             <input type="password" id="pwd" name="pwd" 
+                    pattern="[A-Za-z]+" 
+                    title="Password must only contain letters." 
+                    required>
+             <br><br>
+
+             <input type="submit" value="Submit">
+         </form>
+         <p style="font-size: 0.8em; color: #666; margin-top: 10px;">
+            Disclaimer: Usernames and passwords must consist of only letters.
+         </p>
+      </main>
+
+      <footer>
+         <p>Contact us: support@cinemascenes.com | (555) 012-3690</p>
+         <p>&copy; Cinema Scenes</p>
+      </footer>
+
+   </body>
+</html>
