@@ -1,0 +1,20 @@
+{
+  "name": "cs372finalproject",
+  "version": "1.0.0",
+  "description": "FullStack Web app",
+  "homepage": "https://github.com/techynoahb/CS372FinalProject#readme",
+  "bugs": {
+    "url": "https://github.com/techynoahb/CS372FinalProject/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techynoahb/CS372FinalProject.git"
+  },
+  "license": "ISC",
+  "author": "Noah Bush, Ian Rodriguez",
+  "type": "commonjs",
+  "main": "home.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
