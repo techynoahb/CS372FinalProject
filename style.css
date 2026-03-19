@@ -1,0 +1,63 @@
+         nav a {
+            text-decoration: none;
+            background-color: #ddd;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px 5px 0 0; 
+            margin-right: 5px;
+            font-family: "Herculanum", fantasy;
+         }
+
+         nav a:hover { background-color: #ccc; }
+         
+         body { 
+            font-family: "Times New Roman", Times, serif; 
+            margin: 20px; 
+            text-align: center; 
+         }
+
+         header, footer { 
+            margin-bottom: 20px; 
+            border-bottom: 1px solid #ccc; 
+            padding-bottom: 20px; 
+         }
+
+         footer { 
+            border-bottom: none; 
+            border-top: 1px solid #ccc; 
+            padding-top: 20px; 
+            margin-top: 20px; 
+         }
+         
+         form {
+            display: inline-block;
+            border: 1px solid #eee;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+         }
+
+         .slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin: auto;
+         }
+
+         .mySlides {
+            display: none;
+            text-align: center;
+         }
+
+         .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+         }
+
+         .active {
+            background-color: #717171;
+         }
