@@ -1,0 +1,14 @@
+https://react.dev // this is the main part of the Stack for the front end so we 
+need to try and integrate use react for designing the 
+front end/
+
+Other MISC html/css/js resources & code snippets, Feel free to add resources that you find
+helpful.
+
+https://snipzy.dev // reusable HTML, CSS and JS code snippets for UI
+
+https://gradienthunt.com // for CSS color gradients
+
+https://uiverse.io // big open source library with easily useable components like buttons, nav-
+bars and more
+
