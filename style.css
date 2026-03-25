@@ -9,7 +9,46 @@
          }
 
          nav a:hover { background-color: #ccc; }
+
          
+         .topnav h4 {
+            color: #f2f2f2;                
+            margin: 0;                     /* For title */
+            padding: 14px 16px;           
+            font-family: Arial, sans-serif; 
+            font-size: 16px;             
+            font-weight: normal;           
+            margin-right: auto;           
+         }
+
+         .topnav {
+            background-color: #333;
+            overflow: hidden; 
+            width: 50%;           
+            position: absolute;  
+            top: 0;
+            right: 0;           
+            z-index: 999;
+            display: flex;   
+            align-items: center; 
+         }
+
+         .topnav a {
+            color: #f2f2f2;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-family: Arial, sans-serif; /* Optional: Clean look for nav */
+         }
+
+         .topnav-right {
+            float: right;
+         }
+
+         .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+         }
+
          body { 
             font-family: "Times New Roman", Times, serif; 
             margin: 20px; 
