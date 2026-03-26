@@ -12,3 +12,6 @@ https://gradienthunt.com // for CSS color gradients
 https://uiverse.io // big open source library with easily useable components like buttons, nav-
 bars and more
 
+https://www.youtube.com/watch?v=aYEFeYI7gUM // this is a video explaining how to implement
+react isntead of using barebones html and js, its really easy to learn and implement 
+and I think since its part of the stack we should implement it in our project
