@@ -3,6 +3,7 @@ import Home from './pages/home'
 import Login from './pages/login'
 import Gallery from './pages/gallery'
 
+{/* to see UI use "npm run dev" */}
 
 function App() { /* routes is essentialy 1-1 anchor tags */
   return (

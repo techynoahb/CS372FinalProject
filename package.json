@@ -15,6 +15,12 @@
   "type": "commonjs",
   "main": "home.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "dev": "concurrently \"npm run client\" \"npm run server\"",
+     "client": "cd client && npm run dev",
+  "server": "cd server && nodemon server.js"
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1"
   }
 }
