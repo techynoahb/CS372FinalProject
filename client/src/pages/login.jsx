@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { useNavigate } from 'react-router-dom'
 
 const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).{8,16}$/ // Regex
 
 function Login() { // Login page
+  const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -15,6 +17,7 @@ function Login() { // Login page
       return
     }
     console.log('Login submitted!')
+    navigate('/gallery')
   }
 
   return (
