@@ -1,7 +1,7 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
-function Gallery() { // Gallery function / page with hardcoded # of rows and clms
+function Gallery( {isLoggedIn }) { // Gallery function / page with hardcoded # of rows and clms
   const rows = 5
   const cols = 4
 
@@ -9,7 +9,7 @@ function Gallery() { // Gallery function / page with hardcoded # of rows and clm
     <>
       <header>
         <br />
-        <Navbar />
+        <Navbar isLoggedIn={isLoggedIn}/>
       </header>
 
       <table>

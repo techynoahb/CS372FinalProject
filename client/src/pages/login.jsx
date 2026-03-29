@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).{8,16}$/ // Regex
 
-function Login() { // Login page
+function Login({ setIsLoggedIn, isLoggedIn }) { // Login page
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -15,15 +15,15 @@ function Login() { // Login page
     if (!regex.test(username) || !regex.test(password)) {
       alert('Must be 8-16 characters with uppercase, lowercase, and special character.')
       return
-    }
-    console.log('Login submitted!')
-    navigate('/gallery')
+      }
+    setIsLoggedIn(true) // user is logged in
+    navigate('/gallery') // go straight to gallery after login
   }
 
   return (
     <>
       <header> 
-        <Navbar /> 
+        <Navbar isLoggedIn={isLoggedIn} /> 
       </header>
       <main>
         <h2>Member Login</h2>  { /*Actual login text and prompts */ }

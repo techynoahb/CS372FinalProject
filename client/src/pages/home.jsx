@@ -1,12 +1,12 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
-function Home() { // Home page - SUPER BASIC
+function Home({ isLoggedIn }) { // Home page - SUPER BASIC
   return (
     <>
       <header>
         <br />
-        <Navbar />
+        <Navbar isLoggedIn={isLoggedIn} />
       </header>
 
       <main>
