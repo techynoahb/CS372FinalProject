@@ -36,7 +36,7 @@ function Login() { // Login page
   return (
     <>
       <header> 
-        <Navbar isLoggedIn={isLoggedIn} /> 
+        <Navbar /> 
       </header>
       <main>
         <h2>Member Login</h2>  { /*Actual login text and prompts */ }

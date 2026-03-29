@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 function Navbar() {
-  const user = useAuth()
+  const { user } = useAuth()
   return (
     <div className="topnav">
       <h4>Cinema Scenes: Movie Host</h4>
