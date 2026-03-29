@@ -4,9 +4,8 @@ import { useAuth } from '../context/AuthContext'
 function ProtectedRoute({ children, requiredRole }) {
   const { user } = useAuth()
 
-  if (!user || user.role !== requiredRole) {
-    return <Navigate to="/login" />
-  }
+  if (!user) return <Navigate to="/login" />
+  if (requiredRole && user.role !== requiredRole) return <Navigate to="/login" />
 
   return children
 }

@@ -6,9 +6,9 @@ function Navbar() {
   return (
     <div className="topnav">
       <h4>Cinema Scenes: Movie Host</h4>
-      <Link to="/login">Login</Link>
       <Link to="/home">Home</Link>
-      <Link to="/gallery">Gallery</Link>
+      {!user && <Link to="/login">Login</Link>}
+      {user && <Link to="/gallery">Gallery</Link>}
       {user?.role === 'content_editor' && <Link to="/upload">Upload</Link>}
     </div>
   )
