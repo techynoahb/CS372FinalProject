@@ -13,25 +13,30 @@ function Login() { // Login page
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  function handleSubmit(e) { // login handling
+  async function handleSubmit(e) {
     e.preventDefault()
     if (!regex.test(username) || !regex.test(password)) {
       alert('Must be 8-16 characters with uppercase, lowercase, and special character.')
       return
     }
-    console.log('Login submitted!')
-    let role
-    if (username === 'ContentEditor_99') { // PURELY placeholder until we figure out backend
-      role = "content_editor"
+    try {
+      const res = await fetch('http://localhost:5001/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+      if (!res.ok) {
+        alert('Invalid username or password')
+        return
+      }
+      // users now cannot login without one of the 3 predefined
+      // user/pw.
+      const data = await res.json()
+      setUser({ username: data.username, role: data.role })
+      navigate('/gallery')
+    } catch (err) {
+      alert('Server error, please try again')
     }
-    else if (username === 'Manager_99') {
-      role = "marketing_manager"
-    }
-    else {
-      role = "viewer"
-    }
-    setUser({username, role})
-    navigate('/gallery')
   }
 
   return (
