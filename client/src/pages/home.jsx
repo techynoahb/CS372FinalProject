@@ -12,6 +12,9 @@ function Home({ isLoggedIn }) { // Home page - SUPER BASIC
       <Toolbar />
       <main>
         <h2>Welcome</h2>
+        <p>Welcome to Cinema Scenes, your all in one solution to streaming with No ads and 
+          no fees EVER.
+        </p>
       </main>
 
       <Footer />

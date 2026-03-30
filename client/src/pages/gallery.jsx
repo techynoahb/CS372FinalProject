@@ -87,10 +87,12 @@ function Gallery({ isLoggedIn }) {
 
 function WatchView({ video }) {
   const [vote, setVote] = useState(null);
+
   //const [likes, setLikes] = useState(0);
   //const [dislikes, setDislikes] = useState(0);
 
-  const handleLike = () => {
+  const handleLike = () => { // like and dislike handler to display appropriate reactions
+    // depending on which button the user presses.
     if (vote === 'like') {
       setVote = null;
     }
