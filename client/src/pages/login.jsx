@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import Toolbar from '@mui/material/Toolbar'
 
 const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).{8,16}$/ // Regex
 
@@ -38,6 +39,7 @@ function Login() { // Login page
       <header> 
         <Navbar /> 
       </header>
+      <Toolbar />
       <main>
         <h2>Member Login</h2>  { /*Actual login text and prompts */ }
         <form onSubmit={handleSubmit}>
