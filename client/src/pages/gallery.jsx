@@ -28,7 +28,6 @@ function Gallery({ isLoggedIn }) {
         <br />
         <Navbar isLoggedIn={isLoggedIn}/>
       </header>
-
       <table>
         <tbody>
           {[...Array(numRows)].map((_, rowIndex) => (

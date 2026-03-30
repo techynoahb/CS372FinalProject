@@ -16,11 +16,15 @@
   "main": "home.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-     "dev": "concurrently \"npm run client\" \"npm run server\"",
-     "client": "cd client && npm run dev",
-  "server": "cd server && nodemon server.js"
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "client": "cd client && npm run dev",
+    "server": "cd server && nodemon server.js"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.9",
+    "@mui/material": "^7.3.9",
     "concurrently": "^9.2.1"
   }
 }

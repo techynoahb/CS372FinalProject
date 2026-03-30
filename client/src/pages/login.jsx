@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import Toolbar from '@mui/material/Toolbar'
 
 const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).{8,16}$/ // Regex
 
@@ -12,25 +13,30 @@ function Login() { // Login page
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  function handleSubmit(e) { // login handling
+  async function handleSubmit(e) {
     e.preventDefault()
     if (!regex.test(username) || !regex.test(password)) {
       alert('Must be 8-16 characters with uppercase, lowercase, and special character.')
       return
     }
-    console.log('Login submitted!')
-    let role
-    if (username === 'ContentEditor_99') { // PURELY placeholder until we figure out backend
-      role = "content_editor"
+    try {
+      const res = await fetch('http://localhost:5001/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+      if (!res.ok) {
+        alert('Invalid username or password')
+        return
+      }
+      // users now cannot login without one of the 3 predefined
+      // user/pw.
+      const data = await res.json()
+      setUser({ username: data.username, role: data.role })
+      navigate('/gallery')
+    } catch (err) {
+      alert('Server error, please try again')
     }
-    else if (username === 'Manager_99') {
-      role = "marketing_manager"
-    }
-    else {
-      role = "viewer"
-    }
-    setUser({username, role})
-    navigate('/gallery')
   }
 
   return (
@@ -38,6 +44,7 @@ function Login() { // Login page
       <header> 
         <Navbar /> 
       </header>
+      <Toolbar />
       <main>
         <h2>Member Login</h2>  { /*Actual login text and prompts */ }
         <form onSubmit={handleSubmit}>
