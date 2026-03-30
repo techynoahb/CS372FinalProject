@@ -101,5 +101,38 @@
             height: 120px;
             object-fit: cover;
         }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.9); /* Dark semi-transparent background */
+            z-index: 1000; /* Ensures it sits on top of everything including nav */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+         }
+
+         .modal-content {
+         background-color: #fff;
+         padding: 40px;
+         border-radius: 8px;
+         width: 80%;
+         max-width: 800px;
+         text-align: center;
+         position: relative;
+         }
+
+         .close-btn {
+         position: absolute;
+         top: 10px;
+         right: 15px;
+         background: red;
+         color: white;
+         border: none;
+         padding: 5px 10px;
+         cursor: pointer;
+         }
 
 
