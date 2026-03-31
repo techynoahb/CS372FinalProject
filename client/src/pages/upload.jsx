@@ -22,39 +22,68 @@ function Upload() { // Upload page for content editor
 
   return (
     <>
-      <header> 
-        <Navbar /> 
+      <header id="header_upload_page" name="headerUploadPage">
+        <Navbar />
       </header>
-      <main>
-        <h2>Content Editor: Upload Films</h2>  { /*Actual login text and prompts */ }
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="filmTitle">Movie Title:</label>
+      <main id="main_upload_content" name="mainUploadContent">
+        <h2 id="h2_upload_title" name="h2UploadTitle">
+          Content Editor: Upload Films
+        </h2>  { /*Actual login text and prompts */ }
+        <form
+          id="form_upload"
+          name="formUpload"
+          onSubmit={handleSubmit}
+        >
+          <label
+            id="label_film_title"
+            name="labelFilmTitle"
+            htmlFor="input_film_title"
+          >
+            Movie Title:
+          </label>
           <input
             type="text"
-            id="filmTitle"
-            name="filmTitle"
+            id="input_film_title"
+            name="inputFilmTitle"
             value={filmTitle}
             onChange={(e) => setTitle(e.target.value)}
           />
           <br /><br />
-          <label htmlFor="filmDescription">Film Description: </label>
+          <label
+            id="label_film_description"
+            name="labelFilmDescription"
+            htmlFor="textarea_film_description"
+          >
+            Film Description:
+          </label>
           <textarea
-            id="filmDescription"
-            name="filmDescription"
+            id="textarea_film_description"
+            name="textareaFilmDescription"
             value={filmDescription}
             onChange={(e) => setDescription(e.target.value)}
           />
           <br /><br />
-          <label htmlFor="url">Youtube URL:</label>
+          <label
+            id="label_youtube_url"
+            name="labelYoutubeUrl"
+            htmlFor="input_youtube_url"
+          >
+            Youtube URL:
+          </label>
           <input
             type="text"
-            id="url"
-            name="url"
+            id="input_youtube_url"
+            name="inputYoutubeUrl"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
           <br /><br />
-          <input type="submit" value="Submit" />
+          <input
+            type="submit"
+            id="input_submit_upload"
+            name="inputSubmitUpload"
+            value="Submit"
+          />
         </form>
       </main>
       <Footer />

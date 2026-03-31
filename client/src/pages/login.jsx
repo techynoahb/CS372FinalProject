@@ -16,7 +16,10 @@ function Login() { // Login page
   async function handleSubmit(e) {
     e.preventDefault()
     if (!regex.test(username) || !regex.test(password)) {
-      alert('Must be 8-16 characters with uppercase, lowercase, and special character.')
+      alert(
+        'Must be 8-16 characters with uppercase, lowercase,' +
+        ' and special character.'
+      )
       return
     }
     try {
@@ -41,32 +44,53 @@ function Login() { // Login page
 
   return (
     <>
-      <header> 
-        <Navbar /> 
+      <header id="header_login_page" name="headerLoginPage">
+        <Navbar />
       </header>
       <Toolbar />
-      <main>
-        <h2>Member Login</h2>  { /*Actual login text and prompts */ }
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="username">Username:</label>
+      <main id="main_login_content" name="mainLoginContent">
+        <h2 id="h2_login_title" name="h2LoginTitle">
+          Member Login
+        </h2>  { /*Actual login text and prompts */ }
+        <form id="form_login" name="formLogin"
+          onSubmit={handleSubmit}
+        >
+          <label
+            id="label_username"
+            name="labelUsername"
+            htmlFor="input_username"
+          >
+            Username:
+          </label>
           <input
             type="text"
-            id="username"
-            name="username"
+            id="input_username"
+            name="inputUsername"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <br /><br />
-          <label htmlFor="pwd">Password:</label>
+          <label
+            id="label_password"
+            name="labelPassword"
+            htmlFor="input_password"
+          >
+            Password:
+          </label>
           <input
             type="password"
-            id="pwd"
-            name="pwd"
+            id="input_password"
+            name="inputPassword"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <br /><br />
-          <input type="submit" value="Submit" />
+          <input
+            type="submit"
+            id="input_submit_login"
+            name="inputSubmitLogin"
+            value="Submit"
+          />
         </form>
       </main>
       <Footer />

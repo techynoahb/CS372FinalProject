@@ -5,18 +5,18 @@ import Toolbar from '@mui/material/Toolbar'
 function Home({ isLoggedIn }) { // Home page - SUPER BASIC
   return (
     <>
-      <header>
+      <header id="header_home_page" name="headerHomePage">
         <br />
         <Navbar isLoggedIn={isLoggedIn} />
       </header>
       <Toolbar />
-      <main>
-        <h2>Welcome</h2>
-        <p>Welcome to Cinema Scenes, your all in one solution to streaming with No ads and 
-          no fees EVER.
+      <main id="main_home_content" name="mainHomeContent">
+        <h2 id="h2_home_title" name="h2HomeTitle">Welcome</h2>
+        <p id="p_home_description" name="pHomeDescription">
+          Welcome to Cinema Scenes, your all in one solution to
+          streaming with No ads and no fees EVER.
         </p>
       </main>
-
       <Footer />
     </>
   )

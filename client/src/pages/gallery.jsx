@@ -4,7 +4,11 @@ import { useState } from 'react'
 
 function Gallery({ isLoggedIn }) {
   const testVideos = [ // Test before backend is implemented
-    { youtubeID: "CmomM8ncc4M", filmTitle: "The Pink Panther", filmDescription: "This is a test video description."}
+    {
+      youtubeID: "CmomM8ncc4M",
+      filmTitle: "The Pink Panther",
+      filmDescription: "This is a test video description."
+    }
   ];
 
   const numCols = 4;
@@ -24,32 +28,65 @@ function Gallery({ isLoggedIn }) {
 
   return (
     <>
-      <header>
+      <header id="header_gallery_page" name="headerGalleryPage">
         <br />
         <Navbar isLoggedIn={isLoggedIn}/>
       </header>
-      <table>
-        <tbody>
+      <table id="table_gallery_films" name="tableGalleryFilms">
+        <tbody id="tbody_gallery_rows" name="tbodyGalleryRows">
           {[...Array(numRows)].map((_, rowIndex) => (
-            <tr key={rowIndex}>
+            <tr
+              key={rowIndex}
+              id={`tr_gallery_row_${rowIndex}`}
+              name={`trGalleryRow${rowIndex}`}
+            >
               {[...Array(numCols)].map((_, colIndex) => {
-            
+
                 const videoIndex = rowIndex * numCols + colIndex;
                 const video = testVideos[videoIndex];
 
                 return (
-                  <td key={colIndex}>
+                  <td
+                    key={colIndex}
+                    id={`td_gallery_cell_${videoIndex}`}
+                    name={`tdGalleryCell${videoIndex}`}
+                  >
                     {video ? (
                       <>
-                        <img 
-                          src={`https://img.youtube.com/vi/${video.youtubeID}/hqdefault.jpg`} 
-                          className="img" 
-                          alt={video.filmTitle} 
+                        <img
+                          id={`img_film_thumbnail_${videoIndex}`}
+                          name={`imgFilmThumbnail${videoIndex}`}
+                          src={
+                            `https://img.youtube.com/vi/` +
+                            `${video.youtubeID}/hqdefault.jpg`
+                          }
+                          className="img"
+                          alt={video.filmTitle}
                         />
-                        <h4>{video.filmTitle}</h4>
-                        <div>
-                          <button onClick={() => openModal('watch', video)}>WATCH</button>
-                          <button onClick={() => openModal('info', video)}>INFO</button>
+                        <h4
+                          id={`h4_film_title_${videoIndex}`}
+                          name={`h4FilmTitle${videoIndex}`}
+                        >
+                          {video.filmTitle}
+                        </h4>
+                        <div
+                          id={`div_film_buttons_${videoIndex}`}
+                          name={`divFilmButtons${videoIndex}`}
+                        >
+                          <button
+                            id={`button_watch_${videoIndex}`}
+                            name={`buttonWatch${videoIndex}`}
+                            onClick={() => openModal('watch', video)}
+                          >
+                            WATCH
+                          </button>
+                          <button
+                            id={`button_info_${videoIndex}`}
+                            name={`buttonInfo${videoIndex}`}
+                            onClick={() => openModal('info', video)}
+                          >
+                            INFO
+                          </button>
                         </div>
                       </>
                     ) : null} {/* Renders nothing if the cell is empty */}
@@ -60,16 +97,35 @@ function Gallery({ isLoggedIn }) {
           ))}
         </tbody>
       </table>
-      
+
       {modalType && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <button className="close-btn" onClick={closeModal}>Close X</button>
-            
+        <div
+          id="div_modal_overlay"
+          name="divModalOverlay"
+          className="modal-overlay"
+        >
+          <div
+            id="div_modal_content"
+            name="divModalContent"
+            className="modal-content"
+          >
+            <button
+              id="button_modal_close"
+              name="buttonModalClose"
+              className="close-btn"
+              onClick={closeModal}
+            >
+              Close X
+            </button>
+
             {modalType === 'info' && selectedFilm && (
-              <div>
-                <h2>{selectedFilm.filmTitle} - Info</h2>
-                <p>{selectedFilm.filmDescription}</p>
+              <div id="div_info_panel" name="divInfoPanel">
+                <h2 id="h2_info_title" name="h2InfoTitle">
+                  {selectedFilm.filmTitle} - Info
+                </h2>
+                <p id="p_info_description" name="pInfoDescription">
+                  {selectedFilm.filmDescription}
+                </p>
               </div>
             )}
 
@@ -114,34 +170,51 @@ function WatchView({ video }) {
   const dislikes = vote === 'dislike' ? 1 : 0;
 
   return (
-    <div>
-      <h2>{video.filmTitle}</h2> {/*Video interactions; pray this works.*/}
-      <iframe 
-        width="560" 
-        height="315" 
-        src={`https://www.youtube.com/embed/${video.youtubeID}`} 
-        title="YouTube video player" 
-        frameBorder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    <div id="div_watch_view" name="divWatchView">
+      <h2 id="h2_watch_title" name="h2WatchTitle">
+        {video.filmTitle}
+      </h2> {/*Video interactions; pray this works.*/}
+      <iframe
+        id="iframe_video_player"
+        name="iframeVideoPlayer"
+        width="560"
+        height="315"
+        src={`https://www.youtube.com/embed/${video.youtubeID}`}
+        title="YouTube video player"
+        frameBorder="0"
+        allow={
+          "accelerometer; autoplay; clipboard-write; " +
+          "encrypted-media; gyroscope; picture-in-picture"
+        }
         allowFullScreen
       ></iframe>
-      
-      <div style={{ marginTop: '20px' }}>
-        <button onClick={handleLike}
-          style={{ 
+
+      <div
+        id="div_vote_buttons"
+        name="divVoteButtons"
+        style={{ marginTop: '20px' }}
+      >
+        <button
+          id="button_vote_like"
+          name="buttonVoteLike"
+          onClick={handleLike}
+          style={{
             backgroundColor: vote === 'like' ? '#ddd' : '',
             fontWeight: vote === 'like' ? 'bold' : 'normal'
           }}
         >
-            Like ({likes})
+          Like ({likes})
         </button>
-        <button onClick={handleDislike}
+        <button
+          id="button_vote_dislike"
+          name="buttonVoteDislike"
+          onClick={handleDislike}
           style={{ // Move to CSS?
             backgroundColor: vote === 'like' ? '#ddd' : '',
             fontWeight: vote === 'like' ? 'bold' : 'normal'
           }}
         >
-            Dislike ({dislikes})
+          Dislike ({dislikes})
         </button>
       </div>
     </div>
