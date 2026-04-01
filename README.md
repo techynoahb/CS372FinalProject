@@ -33,7 +33,14 @@ This will start the front-end and back-end at the same time
 - Frontend built with React (still needs polishing)
 - Login validation
 - Pages (Home,Gallery,Login)
-- Simple auth
+- Simple 
+
+## What we need to add
+- Upload/Delete capability for content editor (priority)
+- Landing page enhancement (what is our company about and why)
+- Refined user analytics
+- Dashboard
+- Refined UI/UX
 
 # Our Tech Stack
 - MongoDB
