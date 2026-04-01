@@ -40,3 +40,6 @@ This will start the front-end and back-end at the same time
 - Express.js
 - React.js
 - Node.js
+
+# Why React?
+ *React* is more intuitive to use for a Full stack project of this nature, because in React you only need to describe what the UI needs to look like dependent on the current *state* making our control over the UI for different roles much easier. In vanilla JS however you need to manually find the correct element and update its content each time. In short both options work, however React makes UI control much easier with a few additional steps.
