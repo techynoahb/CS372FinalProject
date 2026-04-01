@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useState } from 'react'
+import { useAuth } from '../context/AuthContext'
 
 function Gallery({ isLoggedIn }) {
   const testVideos = [ // Test before backend is implemented
@@ -15,6 +16,7 @@ function Gallery({ isLoggedIn }) {
   const numRows = Math.ceil(testVideos.length / numCols); // This SHOULD scale for number of videos
   const [modalType, setModalType] = useState(null);
   const [selectedFilm, setSelectedFilm] = useState(null);
+  const { user } = useAuth()
 
   const openModal = (type, video) => {
     setModalType(type);
@@ -130,7 +132,7 @@ function Gallery({ isLoggedIn }) {
             )}
 
             {modalType === 'watch' && selectedFilm && (
-              <WatchView video={selectedFilm} />
+              <WatchView video={selectedFilm} role={user?.role} />
             )}
           </div>
         </div>
@@ -141,16 +143,15 @@ function Gallery({ isLoggedIn }) {
   )
 }
 
-function WatchView({ video }) {
+function WatchView({ video, role }) {
   const [vote, setVote] = useState(null);
-
-  //const [likes, setLikes] = useState(0);
-  //const [dislikes, setDislikes] = useState(0);
+  const [showComment, setShowComment] = useState(false)
+  const [commentText, setCommentText] = useState('')
 
   const handleLike = () => { // like and dislike handler to display appropriate reactions
     // depending on which button the user presses.
     if (vote === 'like') {
-      setVote = null;
+      setVote(null);
     }
     else {
       setVote('like');
@@ -159,7 +160,7 @@ function WatchView({ video }) {
 
   const handleDislike = () => {
     if (vote === 'dislike') {
-      setVote = null;
+      setVote(null);
     }
     else {
       setVote('dislike');
@@ -173,7 +174,7 @@ function WatchView({ video }) {
     <div id="div_watch_view" name="divWatchView">
       <h2 id="h2_watch_title" name="h2WatchTitle">
         {video.filmTitle}
-      </h2> {/*Video interactions; pray this works.*/}
+      </h2> {/*Video interactions*/}
       <iframe
         id="iframe_video_player"
         name="iframeVideoPlayer"
@@ -210,13 +211,42 @@ function WatchView({ video }) {
           name="buttonVoteDislike"
           onClick={handleDislike}
           style={{ // Move to CSS?
-            backgroundColor: vote === 'like' ? '#ddd' : '',
-            fontWeight: vote === 'like' ? 'bold' : 'normal'
+            backgroundColor: vote === 'dislike' ? '#ddd' : '',
+            fontWeight: vote === 'dislike' ? 'bold' : 'normal'
           }}
         >
           Dislike ({dislikes})
         </button>
       </div>
+
+      {role === 'marketing_manager' && ( // Not-yet-functional comment interface for marketing manager role
+        <div id="div_comment_section" name="divCommentSection">
+          <button
+            id="button_comment_toggle"
+            name="buttonCommentToggle"
+            onClick={() => setShowComment(!showComment)}
+          >
+            {showComment ? 'Return' : 'Comment'}
+          </button>
+          {showComment && (
+            <>
+              <textarea
+                id="textarea_comment"
+                name="textareaComment"
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
+              />
+              <button
+                id="button_comment_send"
+                name="buttonCommentSend"
+                onClick={() => console.log(commentText)}
+              >
+                Send
+              </button>
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 }
