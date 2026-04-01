@@ -12,11 +12,9 @@ function Gallery({ isLoggedIn }) {
     }
   ];
 
-  const numCols = 4;
-  const numRows = Math.ceil(testVideos.length / numCols); // This SHOULD scale for number of videos
-  const [modalType, setModalType] = useState(null);
-  const [selectedFilm, setSelectedFilm] = useState(null);
-  const { user } = useAuth()
+const [modalType, setModalType] = useState(null);
+const [selectedFilm, setSelectedFilm] = useState(null);
+const { user } = useAuth()
 
   const openModal = (type, video) => {
     setModalType(type);
@@ -34,71 +32,44 @@ function Gallery({ isLoggedIn }) {
         <br />
         <Navbar isLoggedIn={isLoggedIn}/>
       </header>
-      <table id="table_gallery_films" name="tableGalleryFilms">
-        <tbody id="tbody_gallery_rows" name="tbodyGalleryRows">
-          {[...Array(numRows)].map((_, rowIndex) => (
-            <tr
-              key={rowIndex}
-              id={`tr_gallery_row_${rowIndex}`}
-              name={`trGalleryRow${rowIndex}`}
-            >
-              {[...Array(numCols)].map((_, colIndex) => {
-
-                const videoIndex = rowIndex * numCols + colIndex;
-                const video = testVideos[videoIndex];
-
-                return (
-                  <td
-                    key={colIndex}
-                    id={`td_gallery_cell_${videoIndex}`}
-                    name={`tdGalleryCell${videoIndex}`}
-                  >
-                    {video ? (
-                      <>
-                        <img
-                          id={`img_film_thumbnail_${videoIndex}`}
-                          name={`imgFilmThumbnail${videoIndex}`}
-                          src={
-                            `https://img.youtube.com/vi/` +
-                            `${video.youtubeID}/hqdefault.jpg`
-                          }
-                          className="img"
-                          alt={video.filmTitle}
-                        />
-                        <h4
-                          id={`h4_film_title_${videoIndex}`}
-                          name={`h4FilmTitle${videoIndex}`}
-                        >
-                          {video.filmTitle}
-                        </h4>
-                        <div
-                          id={`div_film_buttons_${videoIndex}`}
-                          name={`divFilmButtons${videoIndex}`}
-                        >
-                          <button
-                            id={`button_watch_${videoIndex}`}
-                            name={`buttonWatch${videoIndex}`}
-                            onClick={() => openModal('watch', video)}
-                          >
-                            WATCH
-                          </button>
-                          <button
-                            id={`button_info_${videoIndex}`}
-                            name={`buttonInfo${videoIndex}`}
-                            onClick={() => openModal('info', video)}
-                          >
-                            INFO
-                          </button>
-                        </div>
-                      </>
-                    ) : null} {/* Renders nothing if the cell is empty */}
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div
+        id="div_gallery_grid"
+        name="divGalleryGrid"
+        style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', padding: '16px' }}
+      >
+        {/* simpler css grid array, that will scale with the 
+        # of videos we have, should work with add/deleting as well */}
+        {testVideos.map((video, i) => (
+          <div key={i} id={`div_gallery_cell_${i}`} name={`divGalleryCell${i}`}>
+            <img
+              id={`img_film_thumbnail_${i}`}
+              name={`imgFilmThumbnail${i}`}
+              src={`https://img.youtube.com/vi/${video.youtubeID}/hqdefault.jpg`}
+              className="img"
+              alt={video.filmTitle}
+            />
+            <h4 id={`h4_film_title_${i}`} name={`h4FilmTitle${i}`}>
+              {video.filmTitle}
+            </h4>
+            <div id={`div_film_buttons_${i}`} name={`divFilmButtons${i}`}>
+              <button
+                id={`button_watch_${i}`}
+                name={`buttonWatch${i}`}
+                onClick={() => openModal('watch', video)}
+              >
+                WATCH
+              </button>
+              <button
+                id={`button_info_${i}`}
+                name={`buttonInfo${i}`}
+                onClick={() => openModal('info', video)}
+              >
+                INFO
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
 
       {modalType && (
         <div
@@ -142,8 +113,10 @@ function Gallery({ isLoggedIn }) {
     </>
   )
 }
-
-function WatchView({ video, role }) {
+{/* this component renders when you click watch on the film card 
+  it takes video and role from useAuth as props so it knows actually what 
+  film to play and if the UI for commenting or not bsaed on role*/} 
+  function WatchView({ video, role }) {
   const [vote, setVote] = useState(null);
   const [showComment, setShowComment] = useState(false)
   const [commentText, setCommentText] = useState('')
@@ -167,6 +140,7 @@ function WatchView({ video, role }) {
     }
   };
 
+  // if user likes, then like = 1 and dislike is 0, and vice versa
   const likes = vote === 'like' ? 1 : 0;
   const dislikes = vote === 'dislike' ? 1 : 0;
 
@@ -174,7 +148,7 @@ function WatchView({ video, role }) {
     <div id="div_watch_view" name="divWatchView">
       <h2 id="h2_watch_title" name="h2WatchTitle">
         {video.filmTitle}
-      </h2> {/*Video interactions*/}
+      </h2> {/*Video interactions, i frame for video 'box'*/}
       <iframe
         id="iframe_video_player"
         name="iframeVideoPlayer"
@@ -195,6 +169,7 @@ function WatchView({ video, role }) {
         name="divVoteButtons"
         style={{ marginTop: '20px' }}
       >
+        {/* actual like and dislike buttons */}
         <button
           id="button_vote_like"
           name="buttonVoteLike"
@@ -210,7 +185,7 @@ function WatchView({ video, role }) {
           id="button_vote_dislike"
           name="buttonVoteDislike"
           onClick={handleDislike}
-          style={{ // Move to CSS?
+          style={{  // in-line css
             backgroundColor: vote === 'dislike' ? '#ddd' : '',
             fontWeight: vote === 'dislike' ? 'bold' : 'normal'
           }}
@@ -230,12 +205,14 @@ function WatchView({ video, role }) {
           </button>
           {showComment && (
             <>
+            {/* text area for the comment */}
               <textarea
                 id="textarea_comment"
                 name="textareaComment"
                 value={commentText}
                 onChange={(e) => setCommentText(e.target.value)}
               />
+              {/* button for comment sending CE*/}
               <button
                 id="button_comment_send"
                 name="buttonCommentSend"
