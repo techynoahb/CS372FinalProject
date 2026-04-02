@@ -2,12 +2,13 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
+//import comment from '../../../server/models/comment';
 
 function Gallery({ isLoggedIn }) {
   const testVideos = [ // Test before backend is implemented
     {
       youtubeID: "CmomM8ncc4M",
-      filmTitle: "The Pink Panther",
+      filmTitle: "The Pink Panther (2006)",
       filmDescription: "This is a test video description."
     }
   ];
@@ -103,7 +104,7 @@ const { user } = useAuth()
             )}
 
             {modalType === 'watch' && selectedFilm && (
-              <WatchView video={selectedFilm} role={user?.role} />
+              <WatchView video={selectedFilm} role={user?.role} username={user?.username}/>
             )}
           </div>
         </div>
@@ -115,11 +116,12 @@ const { user } = useAuth()
 }
 {/* this component renders when you click watch on the film card 
   it takes video and role from useAuth as props so it knows actually what 
-  film to play and if the UI for commenting or not bsaed on role*/} 
-  function WatchView({ video, role }) {
+  film to play and if the UI for commenting or not based on role*/} 
+  function WatchView({ video, role, username }) {
   const [vote, setVote] = useState(null);
   const [showComment, setShowComment] = useState(false)
   const [commentText, setCommentText] = useState('')
+  const [fetchedComments, setFetchedComments] = useState([])
 
   const handleLike = () => { // like and dislike handler to display appropriate reactions
     // depending on which button the user presses.
@@ -143,6 +145,45 @@ const { user } = useAuth()
   // if user likes, then like = 1 and dislike is 0, and vice versa
   const likes = vote === 'like' ? 1 : 0;
   const dislikes = vote === 'dislike' ? 1 : 0;
+
+  const handleSendComment = async() => {
+    if (!commentText.trim())
+      return;
+    try {
+      const res = await fetch('http://localhost:5001/api/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({youtubeID: video.youtubeID, commentText: commentText, username: username})
+      });
+      if (res.ok) {
+        alert("Comment sent!")
+        setCommentText('')
+        setShowComment(false)
+      }
+      else {
+        alert("Error: Failed to send comment.")
+      }
+    } catch(err) {
+      console.error(err)
+      alert("Server error, please try again.")
+    }
+  }
+
+  const handleFetchComments = async() => {
+    setShowComment(!showComment)
+    if (!showComment) {
+      try {
+        const res = await fetch(`http://localhost:5001/api/comments/${video.youtubeID}`);
+        if (res.ok) {
+          const data = await res.json()
+          setFetchedComments(data)
+        }
+      }
+      catch (err) {
+        console.error("Failed to fetch comments.", err)
+      }
+    }
+  };
 
   return (
     <div id="div_watch_view" name="divWatchView">
@@ -194,14 +235,14 @@ const { user } = useAuth()
         </button>
       </div>
 
-      {role === 'marketing_manager' && ( // Not-yet-functional comment interface for marketing manager role
+      {role === 'marketing_manager' && ( // Comment interface for marketing manager role
         <div id="div_comment_section" name="divCommentSection">
           <button
             id="button_comment_toggle"
             name="buttonCommentToggle"
             onClick={() => setShowComment(!showComment)}
           >
-            {showComment ? 'Return' : 'Comment'}
+            {showComment ? 'Return' : 'Leave Comment for Content Editor'}
           </button>
           {showComment && (
             <>
@@ -216,7 +257,7 @@ const { user } = useAuth()
               <button
                 id="button_comment_send"
                 name="buttonCommentSend"
-                onClick={() => console.log(commentText)}
+                onClick={handleSendComment}
               >
                 Send
               </button>
@@ -224,6 +265,33 @@ const { user } = useAuth()
           )}
         </div>
       )}
+
+      {role === 'content_editor' && ( 
+        <div id="div_comment_section" name="divCommentSection">
+          <button
+            id="button_comment_toggle"
+            name="buttonCommentToggle"
+            onClick={handleFetchComments}
+          >
+            {showComment ? 'Return' : 'Read Comment from Marketing Manager'}
+          {/* Button for content editor to view comments from marketing manager*/}
+          </button>
+          {showComment && (
+            <div>
+              {fetchedComments.length > 0 ? (
+                fetchedComments.map((comment, index) => (
+                  <div key={index}>
+                    <p><strong>{comment.username}</strong>: {comment.commentText}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No Comments</p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
     </div>
   );
 }

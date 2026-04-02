@@ -29,18 +29,24 @@ From root directory (CS372FinalProject) run this cmd:
 
 This will start the front-end and back-end at the same time
 
-## Status - 2/4
+## Status (CURRENT)
 - Frontend built with React (still needs polishing)
 - Login validation
 - Pages (Home,Gallery,Login)
-- Simple 
+- Comment Feature (Write-Only for Marketing Manager, Read-Only for Content Editor)
+- Simple
 
-## What we need to add
+## What we **need** to add
 - Upload/Delete capability for content editor (priority)
+- SHA-26 password encryption
 - Landing page enhancement (what is our company about and why)
 - Refined user analytics
 - Dashboard
+
+## May add in the future
+- "Delete comment" feature
 - Refined UI/UX
+- Logout feature
 
 # Our Tech Stack
 - MongoDB
