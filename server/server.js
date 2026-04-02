@@ -1,7 +1,8 @@
 require('dotenv').config()
-const express = require('express')
+const express = require('express') 
 const cors = require('cors')
-const mongoose = require('mongoose')
+const mongoose = require('mongoose') // for mongo
+const crypto = require('crypto') // for sha-256
 const User = require('./models/user')
 const Comment = require('./models/comment')
 
@@ -25,16 +26,15 @@ app.post('/api/login', async (req, res) => {
   try {
     console.log('Login attempt:', req.body)
     const { username, password } = req.body
-    const user = await User.findOne({ username, password })
-    // display message if not valid user and pw
-    console.log('User found:', user)
+    // SHA-256 HASH pw implementation via crypto package
+    const hashedPassword = crypto.createHash('sha256').update(password).digest('hex')
+    const user = await User.findOne({ username, password: hashedPassword })
+
     if (!user) {
       return res.status(401).json({ message: 'Invalid username or password' })
     }
     res.json({ username: user.username, role: user.role })
   } catch (err) {
-    // if not able to get validation/ server error
-    console.error('Login error:', err)
     res.status(500).json({ message: 'Server error' })
   }
 })
