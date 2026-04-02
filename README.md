@@ -34,11 +34,11 @@ This will start the front-end and back-end at the same time
 - Login validation
 - Pages (Home,Gallery,Login)
 - Comment Feature (Write-Only for Marketing Manager, Read-Only for Content Editor)
+- SHA-256 password encryption
 - Simple
 
-## What we **need** to add
+## What we *need* to add
 - Upload/Delete capability for content editor (priority)
-- SHA-26 password encryption
 - Landing page enhancement (what is our company about and why)
 - Refined user analytics
 - Dashboard
@@ -47,6 +47,7 @@ This will start the front-end and back-end at the same time
 - "Delete comment" feature
 - Refined UI/UX
 - Logout feature
+- Genres and tags for videos
 
 # Our Tech Stack
 - MongoDB
@@ -55,4 +56,4 @@ This will start the front-end and back-end at the same time
 - Node.js
 
 # Why React?
- *React* is more intuitive to use for a Full stack project of this nature, because in React you only need to describe what the UI needs to look like dependent on the current *state* making our control over the UI for different roles much easier. In vanilla JS however you need to manually find the correct element and update its content each time. In short both options work, however React makes UI control much easier with a few additional steps.
+ *React* is more intuitive to use for a Full stack project of this nature, because in React you only need to describe what the UI needs to look like dependent on the current *state*, making our control over the UI for different roles much easier. In vanilla JS, however, you need to manually find the correct element and update its content each time. In short, both options work, however React makes UI control much easier with a few additional steps.
