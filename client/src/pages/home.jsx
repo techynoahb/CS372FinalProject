@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar'
 
 function Home({ isLoggedIn }) { // Home page - SUPER BASIC
   return (
-    <>
+    <div className='page-bg' id = "page_bg" name = "pageBG">
       <header id="header_home_page" name="headerHomePage">
         <br />
         <Navbar isLoggedIn={isLoggedIn} />
@@ -18,7 +18,7 @@ function Home({ isLoggedIn }) { // Home page - SUPER BASIC
         </p>
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
 

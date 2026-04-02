@@ -44,7 +44,7 @@ function Login() { // Login page
   }
 
   return (
-    <>
+    <div className='page-bg' id = "page_bg" name = "pageBG">
       <header id="header_login_page" name="headerLoginPage">
         <Navbar />
       </header>
@@ -95,7 +95,7 @@ function Login() { // Login page
         </form>
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
 

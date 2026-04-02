@@ -52,10 +52,17 @@
             color: black;
          }
 
-         body { 
-            font-family: "Times New Roman", Times, serif; 
-            margin: 20px; 
-            text-align: center; 
+         body {
+            font-family: "Times New Roman", Times, serif;
+            margin: 20px;
+            text-align: center;
+         }
+
+         .page-bg {
+            min-height: 100vh;
+            margin: -20px;
+            padding: 20px;
+            background: linear-gradient(160deg, #e3f2fd 0%, #f0f8ff 50%, #ffffff 100%);
          }
 
          header, footer { 

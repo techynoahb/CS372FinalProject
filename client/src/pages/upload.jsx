@@ -22,6 +22,7 @@ function Upload() { // Upload page for content editor
 
   return (
     <>
+      <div className='page-bg' id = "page_bg" name = "pageBG">
       <header id="header_upload_page" name="headerUploadPage">
         <Navbar />
       </header>
@@ -87,6 +88,7 @@ function Upload() { // Upload page for content editor
         </form>
       </main>
       <Footer />
+      </div>
     </>
   )
 }

@@ -29,6 +29,7 @@ const { user } = useAuth()
 
   return (
     <>
+    <div className='page-bg' id = "page_bg" name = "pageBG">
       <header id="header_gallery_page" name="headerGalleryPage">
         <br />
         <Navbar isLoggedIn={isLoggedIn}/>
@@ -111,6 +112,7 @@ const { user } = useAuth()
       )}
 
       <Footer />
+      </div>
     </>
   )
 }
