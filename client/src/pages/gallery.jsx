@@ -17,56 +17,47 @@ const [modalType, setModalType] = useState(null);
 const [selectedFilm, setSelectedFilm] = useState(null);
 const { user } = useAuth()
 
-  const openModal = (type, video) => {
+const openModal = (type, video) => {
     setModalType(type);
     setSelectedFilm(video);
-  };
+};
 
-  const closeModal = () => {
+const closeModal = () => {
     setModalType(null);
     setSelectedFilm(null);
-  };
+};
 
-  return (
-    <>
+return (
+  <>
     <div className='page-bg' id = "page_bg" name = "pageBG">
       <header id="header_gallery_page" name="headerGalleryPage">
         <br />
         <Navbar isLoggedIn={isLoggedIn}/>
       </header>
-      <div
-        id="div_gallery_grid"
-        name="divGalleryGrid"
+      <div id="div_gallery_grid" name="divGalleryGrid"
         style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', padding: '16px' }}
       >
         {/* simpler css grid array, that will scale with the 
         # of videos we have, should work with add/deleting as well */}
         {testVideos.map((video, i) => (
           <div key={i} id={`div_gallery_cell_${i}`} name={`divGalleryCell${i}`}>
-            <img
-              id={`img_film_thumbnail_${i}`}
-              name={`imgFilmThumbnail${i}`}
-              src={`https://img.youtube.com/vi/${video.youtubeID}/hqdefault.jpg`}
-              className="img"
-              alt={video.filmTitle}
+            <img id={`img_film_thumbnail_${i}`} name={`imgFilmThumbnail${i}`} 
+            src={`https://img.youtube.com/vi/${video.youtubeID}/hqdefault.jpg`}
+            className="img"
+            alt={video.filmTitle}
             />
-            <h4 id={`h4_film_title_${i}`} name={`h4FilmTitle${i}`}>
-              {video.filmTitle}
-            </h4>
-            <div id={`div_film_buttons_${i}`} name={`divFilmButtons${i}`}>
-              <button
-                id={`button_watch_${i}`}
-                name={`buttonWatch${i}`}
-                onClick={() => openModal('watch', video)}
+          <h4 id={`h4_film_title_${i}`} name={`h4FilmTitle${i}`}>
+          {video.filmTitle}
+          </h4>
+          <div id={`div_film_buttons_${i}`} name={`divFilmButtons${i}`}>
+            <button id={`button_watch_${i}`} name={`buttonWatch${i}`}
+              onClick={() => openModal('watch', video)}
               >
-                WATCH
-              </button>
-              <button
-                id={`button_info_${i}`}
-                name={`buttonInfo${i}`}
-                onClick={() => openModal('info', video)}
+              WATCH
+            </button>
+              <button id={`button_info_${i}`} name={`buttonInfo${i}`} onClick={() => openModal('info', video)}
               >
-                INFO
+              INFO
               </button>
             </div>
           </div>
@@ -74,26 +65,13 @@ const { user } = useAuth()
       </div>
 
       {modalType && (
-        <div
-          id="div_modal_overlay"
-          name="divModalOverlay"
-          className="modal-overlay"
-        >
-          <div
-            id="div_modal_content"
-            name="divModalContent"
-            className="modal-content"
-          >
-            <button
-              id="button_modal_close"
-              name="buttonModalClose"
-              className="close-btn"
-              onClick={closeModal}
-            >
+        <div id="div_modal_overlay" name="divModalOverlay" className="modal-overlay">
+          <div id="div_modal_content" name="divModalContent" className="modal-content">
+            <button id="button_modal_close" name="buttonModalClose" className="close-btn"
+              onClick={closeModal}>
               Close X
             </button>
-
-            {modalType === 'info' && selectedFilm && (
+  {modalType === 'info' && selectedFilm && (
               <div id="div_info_panel" name="divInfoPanel">
                 <h2 id="h2_info_title" name="h2InfoTitle">
                   {selectedFilm.filmTitle} - Info
@@ -119,6 +97,7 @@ const { user } = useAuth()
 {/* this component renders when you click watch on the film card 
   it takes video and role from useAuth as props so it knows actually what 
   film to play and if the UI for commenting or not based on role*/} 
+
   function WatchView({ video, role, username }) {
   const [vote, setVote] = useState(null);
   const [showComment, setShowComment] = useState(false)
@@ -126,7 +105,6 @@ const { user } = useAuth()
   const [fetchedComments, setFetchedComments] = useState([])
 
   const handleLike = () => { // like and dislike handler to display appropriate reactions
-    // depending on which button the user presses.
     if (vote === 'like') {
       setVote(null);
     }
@@ -192,31 +170,18 @@ const { user } = useAuth()
       <h2 id="h2_watch_title" name="h2WatchTitle">
         {video.filmTitle}
       </h2> {/*Video interactions, i frame for video 'box'*/}
-      <iframe
-        id="iframe_video_player"
-        name="iframeVideoPlayer"
-        width="560"
-        height="315"
-        src={`https://www.youtube.com/embed/${video.youtubeID}`}
-        title="YouTube video player"
-        frameBorder="0"
-        allow={
-          "accelerometer; autoplay; clipboard-write; " +
+      <iframe id="iframe_video_player" name="iframeVideoPlayer" width="560" height="315"
+        src={`https://www.youtube.com/embed/${video.youtubeID}`} title="YouTube video player"
+        frameBorder="0" allow={ "accelerometer; autoplay; clipboard-write; " +
           "encrypted-media; gyroscope; picture-in-picture"
         }
-        allowFullScreen
+      allowFullScreen
       ></iframe>
 
-      <div
-        id="div_vote_buttons"
-        name="divVoteButtons"
-        style={{ marginTop: '20px' }}
+      <div id="div_vote_buttons" name="divVoteButtons" style={{ marginTop: '20px' }}
       >
         {/* actual like and dislike buttons */}
-        <button
-          id="button_vote_like"
-          name="buttonVoteLike"
-          onClick={handleLike}
+        <button id="button_vote_like" name="buttonVoteLike" onClick={handleLike}
           style={{
             backgroundColor: vote === 'like' ? '#ddd' : '',
             fontWeight: vote === 'like' ? 'bold' : 'normal'
@@ -224,10 +189,7 @@ const { user } = useAuth()
         >
           Like ({likes})
         </button>
-        <button
-          id="button_vote_dislike"
-          name="buttonVoteDislike"
-          onClick={handleDislike}
+        <button id="button_vote_dislike" name="buttonVoteDislike" onClick={handleDislike}
           style={{  // in-line css
             backgroundColor: vote === 'dislike' ? '#ddd' : '',
             fontWeight: vote === 'dislike' ? 'bold' : 'normal'
@@ -239,9 +201,7 @@ const { user } = useAuth()
 
       {role === 'marketing_manager' && ( // Comment interface for marketing manager role
         <div id="div_comment_section" name="divCommentSection">
-          <button
-            id="button_comment_toggle"
-            name="buttonCommentToggle"
+          <button id="button_comment_toggle" name="buttonCommentToggle"
             onClick={() => setShowComment(!showComment)}
           >
             {showComment ? 'Return' : 'Leave Comment for Content Editor'}
@@ -249,17 +209,12 @@ const { user } = useAuth()
           {showComment && (
             <>
             {/* text area for the comment */}
-              <textarea
-                id="textarea_comment"
-                name="textareaComment"
-                value={commentText}
+              <textarea id="textarea_comment" name="textareaComment" value={commentText}
                 onChange={(e) => setCommentText(e.target.value)}
               />
               {/* button for comment sending CE*/}
-              <button
-                id="button_comment_send"
-                name="buttonCommentSend"
-                onClick={handleSendComment}
+              <button id="button_comment_send" name="buttonCommentSend" 
+              onClick={handleSendComment}
               >
                 Send
               </button>
@@ -270,9 +225,7 @@ const { user } = useAuth()
 
       {role === 'content_editor' && ( 
         <div id="div_comment_section" name="divCommentSection">
-          <button
-            id="button_comment_toggle"
-            name="buttonCommentToggle"
+          <button id="button_comment_toggle" name="buttonCommentToggle"
             onClick={handleFetchComments}
           >
             {showComment ? 'Return' : 'Read Comment from Marketing Manager'}
