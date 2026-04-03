@@ -223,12 +223,18 @@ return (
         </div>
       )}
 
-      {role === 'content_editor' && ( 
+      {(role === 'content_editor' || role === 'marketing_manager') && ( 
         <div id="div_comment_section" name="divCommentSection">
           <button id="button_comment_toggle" name="buttonCommentToggle"
             onClick={handleFetchComments}
           >
-            {showComment ? 'Return' : 'Read Comment from Marketing Manager'}
+            {showComment ? // Allow marketing manager to read own comments, also with varying button text per role
+              'Return' :
+                (role === 'marketing_manager'
+                  ? 'Review Comments'
+                  : 'Read Comments from Marketing Manager'
+                )
+            }
           {/* Button for content editor to view comments from marketing manager*/}
           </button>
           {showComment && (

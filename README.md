@@ -42,12 +42,13 @@ This will start the front-end and back-end at the same time
 - Landing page enhancement (what is our company about and why)
 - Refined user analytics
 - Dashboard
+- Film genres
 
 ## May add in the future
 - "Delete comment" feature
 - Refined UI/UX
 - Logout feature
-- Genres and tags for videos
+- Film tags
 
 # Our Tech Stack
 - MongoDB
