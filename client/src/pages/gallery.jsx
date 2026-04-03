@@ -9,7 +9,8 @@ function Gallery({ isLoggedIn }) {
     {
       youtubeID: "CmomM8ncc4M",
       filmTitle: "The Pink Panther (2006)",
-      filmDescription: "This is a test video description."
+      filmDescription: "This is a test video description.",
+      filmGenre: "Comedy"
     }
   ];
 
@@ -71,11 +72,14 @@ return (
               onClick={closeModal}>
               Close X
             </button>
-  {modalType === 'info' && selectedFilm && (
+            {modalType === 'info' && selectedFilm && (
               <div id="div_info_panel" name="divInfoPanel">
                 <h2 id="h2_info_title" name="h2InfoTitle">
                   {selectedFilm.filmTitle} - Info
                 </h2>
+                <h4 id="h4_info_genre" name="h4InfoGenre">
+                  Genre: {selectedFilm.filmGenre}
+                </h4>
                 <p id="p_info_description" name="pInfoDescription">
                   {selectedFilm.filmDescription}
                 </p>
@@ -199,43 +203,19 @@ return (
         </button>
       </div>
 
-      {role === 'marketing_manager' && ( // Comment interface for marketing manager role
-        <div id="div_comment_section" name="divCommentSection">
-          <button id="button_comment_toggle" name="buttonCommentToggle"
-            onClick={() => setShowComment(!showComment)}
-          >
-            {showComment ? 'Return' : 'Leave Comment for Content Editor'}
-          </button>
-          {showComment && (
-            <>
-            {/* text area for the comment */}
-              <textarea id="textarea_comment" name="textareaComment" value={commentText}
-                onChange={(e) => setCommentText(e.target.value)}
-              />
-              {/* button for comment sending CE*/}
-              <button id="button_comment_send" name="buttonCommentSend" 
-              onClick={handleSendComment}
-              >
-                Send
-              </button>
-            </>
-          )}
-        </div>
-      )}
-
       {(role === 'content_editor' || role === 'marketing_manager') && ( 
         <div id="div_comment_section" name="divCommentSection">
           <button id="button_comment_toggle" name="buttonCommentToggle"
             onClick={handleFetchComments}
           >
-            {showComment ? // Allow marketing manager to read own comments, also with varying button text per role
+            {showComment ? // Varying button text by role: read-only for content editor, read AND write for marketing manager
               'Return' :
                 (role === 'marketing_manager'
-                  ? 'Review Comments'
+                  ? 'Leave & Review Comments'
                   : 'Read Comments from Marketing Manager'
                 )
             }
-          {/* Button for content editor to view comments from marketing manager*/}
+          {/* Button for viewing comments from marketing manager*/}
           </button>
           {showComment && (
             <div>
@@ -248,8 +228,24 @@ return (
               ) : (
                 <p>No Comments</p>
               )}
+
+              {role === 'marketing_manager' && (
+                <>
+                  <br/>
+                  <textarea id="textarea_comment" name="textareaComment" value={commentText}
+                    onChange={(e) => setCommentText(e.target.value)}
+                  />
+                  {/*Button to send marketing manager comment into database to be saved for viewing*/}
+                  <button id="button_comment_send" name="buttonCommentSend" 
+                    onClick={handleSendComment}
+                  >
+                    Send
+                  </button>
+                </>
+              )}
             </div>
           )}
+
         </div>
       )}
 
