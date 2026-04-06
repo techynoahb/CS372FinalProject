@@ -33,7 +33,7 @@ This will start the front-end and back-end at the same time
 - Frontend built with React (still needs polishing)
 - Login validation
 - Pages (Home,Gallery,Login)
-- Comment Feature (Write-Only for Marketing Manager, Read-Only for Content Editor)
+- Comment Feature (Read/Write for Marketing Manager, Read-Only for Content Editor)
 - SHA-256 password encryption
 - Simple
 
