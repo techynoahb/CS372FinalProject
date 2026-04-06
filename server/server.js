@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 
 {/* post API login route that searches DB for matching user and pw 
 and returns the users role.*/
-}
+} 
 app.post('/api/login', async (req, res) => {
   try {
     console.log('Login attempt:', req.body)
@@ -65,6 +65,7 @@ app.get('/api/comments/:youtubeID', async (req, res) => {
     res.status(500).json({ message: 'Server error fetching comments.' })
   }
 })
+
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server running on port ${process.env.PORT || 5001}`)

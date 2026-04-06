@@ -206,8 +206,7 @@ return (
       {(role === 'content_editor' || role === 'marketing_manager') && ( 
         <div id="div_comment_section" name="divCommentSection">
           <button id="button_comment_toggle" name="buttonCommentToggle"
-            onClick={handleFetchComments}
-          >
+            onClick={handleFetchComments}>
             {showComment ? // Varying button text by role: read-only for content editor, read AND write for marketing manager
               'Return' :
                 (role === 'marketing_manager'

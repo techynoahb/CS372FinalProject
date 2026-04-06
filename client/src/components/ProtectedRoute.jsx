@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
+// route guard, if not a user you cannot do /gallery
 function ProtectedRoute({ children, requiredRole }) {
   const { user } = useAuth()
 

@@ -3,7 +3,9 @@ import Footer from '../components/Footer'
 import Toolbar from '@mui/material/Toolbar'
 
 function Home({ isLoggedIn }) { // Home page - SUPER BASIC
+  
   return (
+    <>
     <div className='page-bg' id = "page_bg" name = "pageBG">
       <header id="header_home_page" name="headerHomePage">
         <br />
@@ -19,6 +21,7 @@ function Home({ isLoggedIn }) { // Home page - SUPER BASIC
       </main>
       <Footer />
     </div>
+    </>
   )
 }
 
