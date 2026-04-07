@@ -9,11 +9,12 @@ function Upload() { // Upload page for content editor
   const [filmTitle, setTitle] = useState('')
   const [filmDescription, setDescription] = useState('')
   const [url, setUrl] = useState('')
+  const [filmGenre, setGenre] = useState('')
 
   
   function handleSubmit(e) {
     e.preventDefault()
-    if (!filmTitle || !filmDescription || !YTregex.test(url)) {
+    if (!filmTitle || !filmDescription || !filmGenre || !YTregex.test(url)) {
       alert('Improper YouTube URL. Try again.')
       return
     }
@@ -55,6 +56,13 @@ function Upload() { // Upload page for content editor
           </label>
           <input type="text" id="input_youtube_url" name="inputYoutubeUrl" value={url}
             onChange={(e) => setUrl(e.target.value)}
+          />
+          <br /><br />
+          <label id="label_film_genre" name="labelFilmGenre" htmlFor="input_film_genre" >
+            Film Genre: 
+          </label>
+          <input type="text" id="input_film_genre" name="inputFilmGenre" value={filmGenre}
+            onChange={(e) => setGenre(e.target.value)}
           />
           <br /><br />
           <input type="submit" id="input_submit_upload" name="inputSubmitUpload" value="Submit"

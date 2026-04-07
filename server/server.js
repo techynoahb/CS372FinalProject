@@ -5,6 +5,7 @@ const mongoose = require('mongoose') // for mongo
 const crypto = require('crypto') // for sha-256
 const User = require('./models/user')
 const Comment = require('./models/comment')
+const Film = require('./models/film')
 
 const app = express()
 
@@ -63,6 +64,19 @@ app.get('/api/comments/:youtubeID', async (req, res) => {
   catch (err) {
     console.error("Error: Failed to fetch comments.")
     res.status(500).json({ message: 'Server error fetching comments.' })
+  }
+})
+
+// To retrieve films in the database
+app.get('/api/films', async (req, res) => { 
+  try {
+    const films = await Film.find({ youtubeID: req.params.youtubeID })
+    res.json(films)
+    console.log('Films found:', films)
+  }
+  catch (err) {
+    console.error("Error: Failed to fetch films (videos).")
+    res.status(500).json({ message: 'Server error fetching films (videos).' })
   }
 })
 
