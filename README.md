@@ -38,7 +38,7 @@ This will start the front-end and back-end at the same time
 - Simple
 
 ## What we *need* to add
-- Upload/Delete capability for content editor (priority)
+- Upload/Delete capability for content editor (priority, in-progress)
 - Landing page enhancement (what is our company about and why)
 - Refined user analytics
 - Dashboard

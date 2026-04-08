@@ -16,7 +16,7 @@ function Home({ isLoggedIn }) { // Home page - SUPER BASIC
         <h2 id="h2_home_title" name="h2HomeTitle">Welcome</h2>
         <p id="p_home_description" name="pHomeDescription">
           Welcome to Cinema Scenes, your all in one solution to
-          streaming with No ads and no fees EVER.
+          streaming. New movies are uploaded frequently, for you to watch for FREE!
         </p>
       </main>
       <Footer />

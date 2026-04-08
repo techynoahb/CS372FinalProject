@@ -2,24 +2,57 @@ import { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
-const YTregex = /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[\w-]{11}/ // Regex
+const YTregex = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/ // Regex
 function Upload() { // Upload page for content editor
   const navigate = useNavigate()
+  const { user } = useAuth()
   const [filmTitle, setTitle] = useState('')
   const [filmDescription, setDescription] = useState('')
   const [url, setUrl] = useState('')
   const [filmGenre, setGenre] = useState('')
 
   
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!filmTitle || !filmDescription || !filmGenre || !YTregex.test(url)) {
+    if (!filmTitle || !filmDescription || !filmGenre) {
+      alert('Fill out all fields and try again.')
+      return
+    }
+
+    // Get only the video ID chars for embed
+    const match = url.match(YTregex)
+    const videoID = (match && match[2].length === 11) ? match[2] : null
+
+    if (!videoID) {
       alert('Improper YouTube URL. Try again.')
       return
     }
-    console.log('Movie uploaded!')
-    navigate('/gallery')
+
+    try {
+      const res = await fetch('http://localhost:5001/api/films', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          youtubeID: videoID,
+          filmTitle: filmTitle,
+          filmDescription: filmDescription,
+          filmGenre: filmGenre,
+          filmUploader: user?.username
+        })
+      });
+      if (res.ok) {
+        alert("Movie uploaded!")
+        navigate('/gallery')
+      }
+      else {
+        alert("Error: Failed to upload movie.")
+      }
+    } catch(err) {
+      console.error(err)
+      alert("Server error, please try again.")
+    }
   }
 
   return (

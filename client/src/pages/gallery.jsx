@@ -2,7 +2,6 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
-//import comment from '../../../server/models/comment';
 
 function Gallery({ isLoggedIn }) {
   const testVideos = [ // Test before backend is implemented

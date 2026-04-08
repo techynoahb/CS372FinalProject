@@ -67,10 +67,25 @@ app.get('/api/comments/:youtubeID', async (req, res) => {
   }
 })
 
+// To add new films to the database
+app.post('/api/films', async (req, res) => { 
+  try {
+    const { youtubeID, filmTitle, filmDescription, filmGenre, filmUploader } = req.body
+    const newFilm = new Film({ youtubeID, filmTitle, filmDescription, filmGenre, filmUploader })
+    await newFilm.save()
+    console.log('New movie successfully added to database:', newFilm) 
+    res.status(201).json({ message: 'Film saved successfully' })
+  }
+  catch (err) {
+    console.error("Error: Failed to save film from Content Editor to database.", err)
+    res.status(500).json({ message: 'Server error saving film.' })
+  }
+})
+
 // To retrieve films in the database
 app.get('/api/films', async (req, res) => { 
   try {
-    const films = await Film.find({ youtubeID: req.params.youtubeID })
+    const films = await Film.find()
     res.json(films)
     console.log('Films found:', films)
   }
