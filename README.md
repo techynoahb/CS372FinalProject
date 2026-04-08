@@ -35,14 +35,15 @@ This will start the front-end and back-end at the same time
 - Pages (Home,Gallery,Login)
 - Comment Feature (Read/Write for Marketing Manager, Read-Only for Content Editor)
 - SHA-256 password encryption
+- Upload Film Feature for Content Editor; Gallery updates with each film added.
+- Film genres
 - Simple
 
 ## What we *need* to add
-- Upload/Delete capability for content editor (priority, in-progress)
+- Delete film capability for content editor (priority)
 - Landing page enhancement (what is our company about and why)
 - Refined user analytics
 - Dashboard
-- Film genres
 
 ## May add in the future
 - "Delete comment" feature

@@ -1,31 +1,40 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 
 function Gallery({ isLoggedIn }) {
-  const testVideos = [ // Test before backend is implemented
-    {
-      youtubeID: "CmomM8ncc4M",
-      filmTitle: "The Pink Panther (2006)",
-      filmDescription: "This is a test video description.",
-      filmGenre: "Comedy"
+  const [modalType, setModalType] = useState(null);
+  const [selectedFilm, setSelectedFilm] = useState(null);
+  const [fetchedFilms, setFetchedFilms] = useState([])
+  const { user } = useAuth()
+
+  const openModal = (type, video) => {
+      setModalType(type);
+      setSelectedFilm(video);
+  };
+
+  const closeModal = () => {
+      setModalType(null);
+      setSelectedFilm(null);
+  };
+
+  const handleFetchFilms = async() => {
+    try {
+      const res = await fetch(`http://localhost:5001/api/films`);
+      if (res.ok) {
+        const data = await res.json()
+        setFetchedFilms(data)
+      }
     }
-  ];
+    catch (err) {
+      console.error("Failed to fetch films (videos).", err)
+    }
+  }
 
-const [modalType, setModalType] = useState(null);
-const [selectedFilm, setSelectedFilm] = useState(null);
-const { user } = useAuth()
-
-const openModal = (type, video) => {
-    setModalType(type);
-    setSelectedFilm(video);
-};
-
-const closeModal = () => {
-    setModalType(null);
-    setSelectedFilm(null);
-};
+  useEffect(() => {
+    handleFetchFilms();
+  }, []);
 
 return (
   <>
@@ -39,7 +48,7 @@ return (
       >
         {/* simpler css grid array, that will scale with the 
         # of videos we have, should work with add/deleting as well */}
-        {testVideos.map((video, i) => (
+        {fetchedFilms.map((video, i) => (
           <div key={i} id={`div_gallery_cell_${i}`} name={`divGalleryCell${i}`}>
             <img id={`img_film_thumbnail_${i}`} name={`imgFilmThumbnail${i}`} 
             src={`https://img.youtube.com/vi/${video.youtubeID}/hqdefault.jpg`}
@@ -78,6 +87,9 @@ return (
                 </h2>
                 <h4 id="h4_info_genre" name="h4InfoGenre">
                   Genre: {selectedFilm.filmGenre}
+                </h4>
+                <h4 id="h4_info_uploader" name="h4InfoUploader">
+                  Uploader: {selectedFilm.filmUploader}
                 </h4>
                 <p id="p_info_description" name="pInfoDescription">
                   {selectedFilm.filmDescription}

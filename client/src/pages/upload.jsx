@@ -35,10 +35,10 @@ function Upload() { // Upload page for content editor
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({
-          youtubeID: videoID,
+          youtubeID: videoID.trim(),
           filmTitle: filmTitle,
           filmDescription: filmDescription,
-          filmGenre: filmGenre,
+          filmGenre: filmGenre.trim().toUpperCase(),
           filmUploader: user?.username
         })
       });
