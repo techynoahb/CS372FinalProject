@@ -95,6 +95,21 @@ app.get('/api/films', async (req, res) => {
   }
 })
 
+// To delete films from database
+app.delete('/api/films/:youtubeID', async (req, res) => { 
+  try {
+    const deletedFilm = await Film.findOneAndDelete({ youtubeID: req.params.youtubeID })
+    if (!deletedFilm) {
+      return res.status(404).json({ message: 'Film (Video) not found' })
+    }
+    console.log('Film successfully deleted:', deletedFilm)
+    res.status(200).json({ message: 'Film deleted successfully' })
+  }
+  catch (err) {
+    console.error("Error: Failed to delete film from database.", err)
+    res.status(500).json({ message: 'Server error deleting film (video).' })
+  }
+})
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server running on port ${process.env.PORT || 5001}`)

@@ -98,7 +98,7 @@ return (
             )}
 
             {modalType === 'watch' && selectedFilm && (
-              <WatchView video={selectedFilm} role={user?.role} username={user?.username}/>
+              <WatchView video={selectedFilm} role={user?.role} username={user?.username} closeModal={closeModal} refreshGallery={handleFetchFilms}/>
             )}
           </div>
         </div>
@@ -113,7 +113,7 @@ return (
   it takes video and role from useAuth as props so it knows actually what 
   film to play and if the UI for commenting or not based on role*/} 
 
-  function WatchView({ video, role, username }) {
+  function WatchView({ video, role, username, closeModal, refreshGallery }) {
   const [vote, setVote] = useState(null);
   const [showComment, setShowComment] = useState(false)
   const [commentText, setCommentText] = useState('')
@@ -180,6 +180,27 @@ return (
     }
   };
 
+  const handleDeleteFilm = async() => {
+    const confirmDelete = window.confirm(`Delete "${video.filmTitle}"?`);
+    if (!confirmDelete) return;
+
+    try {
+      const res = await fetch(`http://localhost:5001/api/films/${video.youtubeID}`, { method: 'DELETE' })
+      if (res.ok) {
+        alert(`${video.filmTitle} has successfully been deleted.`)
+        closeModal();
+        refreshGallery();
+      }
+      else {
+        alert("Error: Failed to delete film.")
+      }
+    }
+    catch (err) {
+      console.error("Failed to connect to server for update. ", err);
+    }
+
+  }
+
   return (
     <div id="div_watch_view" name="divWatchView">
       <h2 id="h2_watch_title" name="h2WatchTitle">
@@ -213,6 +234,20 @@ return (
           Dislike ({dislikes})
         </button>
       </div>
+
+      {/* Delete film button for content editor */}
+      {role === 'content_editor' && (
+        <div id="div_delete_film" name="divDeleteFilm" style={{ marginTop: '10px' }}>
+          <button 
+            id="button_delete_film" 
+            name="buttonDeleteFilm" 
+            onClick={handleDeleteFilm}
+            style={{ backgroundColor: '#a59a9a', color: 'white', fontWeight: 'bold' }}
+          >
+            Delete Film
+          </button>
+        </div>
+      )}
 
       {(role === 'content_editor' || role === 'marketing_manager') && ( 
         <div id="div_comment_section" name="divCommentSection">

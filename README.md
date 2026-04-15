@@ -35,21 +35,19 @@ This will start the front-end and back-end at the same time
 - Pages (Home,Gallery,Login)
 - Comment Feature (Read/Write for Marketing Manager, Read-Only for Content Editor)
 - SHA-256 password encryption
-- Upload Film Feature for Content Editor; Gallery updates with each film added.
+- Upload Film Feature for Content Editor; dedicated Upload page updates Gallery with each film added
+- Delete Film Feature for Content Editor; button on each video removes it from database and refreshes Gallery
 - Film genres
 - Simple
-
-## What we *need* to add
-- Delete film capability for content editor (priority)
-- Landing page enhancement (what is our company about and why)
-- Refined user analytics
-- Dashboard
 
 ## May add in the future
 - "Delete comment" feature
 - Refined UI/UX
 - Logout feature
 - Film tags
+- Landing page enhancement (what is our company about and why)
+- Refined user analytics
+- Dashboard
 
 # Our Tech Stack
 - MongoDB
