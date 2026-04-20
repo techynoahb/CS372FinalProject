@@ -39,11 +39,11 @@ This will start the front-end and back-end at the same time
 - Delete Film Feature for Content Editor; button on each video removes it from database and refreshes Gallery
 - Delete Comment Feature for Marketing Manager; button on each comment removes it from database and refreshes
 - Film genres
+- Logout feature
 
 **TODO: Refined UI/UX**
 
 ## Unimplemented Features (Optional)
-- Logout feature
 - Film tags
 - Landing page enhancement (what is our company about and why)
 - Refined user analytics

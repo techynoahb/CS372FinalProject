@@ -3,11 +3,18 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 function Navbar() {
-  const { user } = useAuth()
+  const { user, setUser } = useAuth()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    setUser(null)
+    navigate('/home')
+  }
+
   return (
     <AppBar position="fixed"> {/* makes navbar stick to the top of the page */}
       <Toolbar variant = "dense"> {/* mui library*/}
@@ -21,6 +28,8 @@ function Navbar() {
         {user?.role === 'content_editor' && (
           <Button color="inherit" component={Link} to="/upload">Upload</Button>
         )}
+        {/* Current attempt */}
+        {user && (<Button color="inherit" onClick={handleLogout}>Logout</Button>)}
       </Toolbar>
     </AppBar>
   )
