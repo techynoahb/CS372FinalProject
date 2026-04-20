@@ -36,7 +36,7 @@ function Upload() { // Upload page for content editor
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({
           youtubeID: videoID.trim(),
-          filmTitle: filmTitle,
+          filmTitle: filmTitle.trim(),
           filmDescription: filmDescription,
           filmGenre: filmGenre.trim().toUpperCase(),
           filmUploader: user?.username

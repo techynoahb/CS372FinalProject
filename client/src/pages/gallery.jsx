@@ -148,7 +148,7 @@ return (
       const res = await fetch('http://localhost:5001/api/comments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({youtubeID: video.youtubeID, commentText: commentText, username: username})
+        body: JSON.stringify({youtubeID: video.youtubeID, commentText: commentText.trim(), username: username})
       });
       if (res.ok) {
         alert("Comment sent!")

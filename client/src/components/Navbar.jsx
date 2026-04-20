@@ -28,8 +28,7 @@ function Navbar() {
         {user?.role === 'content_editor' && (
           <Button color="inherit" component={Link} to="/upload">Upload</Button>
         )}
-        {/* Current attempt */}
-        {user && (<Button color="inherit" onClick={handleLogout}>Logout</Button>)}
+        {user && (<Button color="inherit" onClick={handleLogout}>Logout</Button>)} {/* Logout feature */}
       </Toolbar>
     </AppBar>
   )
