@@ -33,16 +33,16 @@ This will start the front-end and back-end at the same time
 - Frontend built with React (still needs polishing)
 - Login validation
 - Pages (Home,Gallery,Login)
-- Comment Feature (Read/Write for Marketing Manager, Read-Only for Content Editor)
+- Read/Write Comment Feature (Read/Write for Marketing Manager, Read-Only for Content Editor)
 - SHA-256 password encryption
 - Upload Film Feature for Content Editor; dedicated Upload page updates Gallery with each film added
 - Delete Film Feature for Content Editor; button on each video removes it from database and refreshes Gallery
+- Delete Comment Feature for Marketing Manager; button on each comment removes it from database and refreshes
 - Film genres
-- Simple
 
-## May add in the future
-- "Delete comment" feature
-- Refined UI/UX
+**TODO: Refined UI/UX**
+
+## Unimplemented Features (Optional)
 - Logout feature
 - Film tags
 - Landing page enhancement (what is our company about and why)

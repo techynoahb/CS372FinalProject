@@ -201,6 +201,23 @@ return (
 
   }
 
+  const handleDeleteComment = async(commentID) => {
+    try {
+      const res = await fetch(`http://localhost:5001/api/comments/${commentID}`, { method: 'DELETE' })
+      if (res.ok) {
+        alert(`Comment has successfully been deleted.`)
+        setFetchedComments(fetchedComments.filter(comment => comment._id !== commentID));
+      }
+      else {
+        alert("Error: Failed to delete comment.")
+      }
+    }
+    catch (err) {
+      console.error("Failed to connect to server for update. ", err);
+    }
+
+  }
+
   return (
     <div id="div_watch_view" name="divWatchView">
       <h2 id="h2_watch_title" name="h2WatchTitle">
@@ -266,8 +283,24 @@ return (
             <div>
               {fetchedComments.length > 0 ? (
                 fetchedComments.map((comment, index) => (
-                  <div key={index}>
-                    <p><strong>{comment.username}</strong>: {comment.commentText}</p>
+                  <div
+                    key={index}
+                    id="div_fetch_comments"
+                    name="divFetchComments"
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}
+                  >
+                    {/* Print every comment author username and comment text, and delete button if logged in as marketing manager */}
+                    <p style={{ margin: 0 }}><strong>{comment.username}</strong>: {comment.commentText}</p>
+                    {role === 'marketing_manager' && username === comment.username && (
+                      <button 
+                        id="button_delete_comment" 
+                        name="buttonDeleteComment" 
+                        onClick={() => handleDeleteComment(comment._id)}
+                        style={{ backgroundColor: '#a59a9a', color: 'white', fontWeight: 'bold', marginLeft: '15px' }}
+                      >
+                        Delete Comment
+                      </button>
+                    )}
                   </div>
                 ))
               ) : (

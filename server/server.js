@@ -54,7 +54,7 @@ app.post('/api/comments', async (req, res) => {
   }
 })
 
-// To retrieve comments by content editor
+// To retrieve comments by marketing manager
 app.get('/api/comments/:youtubeID', async (req, res) => { 
   try {
     const comments = await Comment.find({ youtubeID: req.params.youtubeID })
@@ -95,19 +95,37 @@ app.get('/api/films', async (req, res) => {
   }
 })
 
-// To delete films from database
+// To delete films (and any associated comments on film) from database
 app.delete('/api/films/:youtubeID', async (req, res) => { 
   try {
     const deletedFilm = await Film.findOneAndDelete({ youtubeID: req.params.youtubeID })
     if (!deletedFilm) {
       return res.status(404).json({ message: 'Film (Video) not found' })
     }
+    const deletedComments = await Comment.deleteMany({ youtubeID: req.params.youtubeID })
     console.log('Film successfully deleted:', deletedFilm)
+    console.log('Deleted all comments associated with film.')
     res.status(200).json({ message: 'Film deleted successfully' })
   }
   catch (err) {
     console.error("Error: Failed to delete film from database.", err)
     res.status(500).json({ message: 'Server error deleting film (video).' })
+  }
+})
+
+// To delete comments from database
+app.delete('/api/comments/:commentID', async (req, res) => { 
+  try {
+    const deletedComment = await Comment.findByIdAndDelete(req.params.commentID)
+    if (!deletedComment) {
+      return res.status(404).json({ message: 'Comment not found' })
+    }
+    console.log('Comment successfully deleted:', deletedComment)
+    res.status(200).json({ message: 'Comment deleted successfully' })
+  }
+  catch (err) {
+    console.error("Error: Failed to delete comment from database.", err)
+    res.status(500).json({ message: 'Server error deleting comment.' })
   }
 })
 
