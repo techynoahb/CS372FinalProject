@@ -27,9 +27,11 @@ Make sure you have these installed:
 From root directory (CS372FinalProject) run this cmd:
 - *npm run dev*
 
-This will start the front-end and back-end at the same time
+This will start the front-end and back-end at the same time. If this does not work, run *npm start* in the server directory and *npm run dev* in the client directory.
 
-## Status (CURRENT)
+Known Issues: In order for videos to play properly, it is strongly preferred for the app to be run in Chrome.
+
+## Implemented Features
 - Frontend built with React (still needs polishing)
 - Login validation
 - Pages (Home,Gallery,Login)
@@ -40,14 +42,7 @@ This will start the front-end and back-end at the same time
 - Delete Comment Feature for Marketing Manager; button on each comment removes it from database and refreshes
 - Film genres
 - Logout feature
-
-**TODO: Refined UI/UX**
-
-## Unimplemented Features (Optional)
-- Film tags
-- Landing page enhancement (what is our company about and why)
-- Refined user analytics
-- Dashboard
+- Intuitive UI/UX
 
 # Our Tech Stack
 - MongoDB
