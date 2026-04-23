@@ -226,7 +226,7 @@ return (
       <iframe id="iframe_video_player" name="iframeVideoPlayer" width="560" height="315"
         src={`https://www.youtube.com/embed/${video.youtubeID}`} title="YouTube video player"
         frameBorder="0" allow={ "accelerometer; autoplay; clipboard-write; " +
-          "encrypted-media; gyroscope; picture-in-picture"
+          "encrypted-media; gyroscope; picture-in-picture; fullscreen; web-share"
         }
       allowFullScreen
       ></iframe>
