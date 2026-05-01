@@ -6,6 +6,16 @@ Full-Stack streaming web app utilizing MongoDB, Node.js, Express.js & React JS(M
 
 **Software Requirements**: The user must have node.js and npm installed, in addition to a web browser to access the web app. In order for videos to play properly, it is strongly preferred for the app to be run in Google Chrome.
 
+## Node.Js Version Check
+This project requires Node.js v20 or higher. Before installing, check your current version:
+
+ - *node -v*
+ - *npm -v*
+
+## If you dont have Node.js or your Node.js versions is under v20
+
+Download and install the latest LTR version from https://nodejs.org/en/download, and this will replace your current version
+
 ## Installation Process
 
 1. Clone our github repository (or download raw files from github)
